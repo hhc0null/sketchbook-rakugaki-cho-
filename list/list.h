@@ -13,11 +13,11 @@ typedef struct _list_t {
 
 // external functions 
 void create(list_t **, int);
-void destory(list_t **);
+void destroy(list_t **);
 void append(list_t **, int);
 void prepend(list_t **, int);
 void insert(list_t **, int, int);
-void expunge(list_t **, int);
+void expunge(list_t **, int); // cannot use "delete" identifier
 int size(list_t **);
 int get(list_t **, int);
 

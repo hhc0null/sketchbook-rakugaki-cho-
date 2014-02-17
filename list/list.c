@@ -1,3 +1,5 @@
+// a bad implementation
+
 #include "list.h"
 
 // internal
@@ -6,6 +8,7 @@ static node_t *_delnode(node_t *, node_t *);
 
 int main(void)
 {
+    /*** test code ***/
     list_t *list = NULL;
 
     create(&list, 0);
@@ -33,10 +36,11 @@ int main(void)
         printf("list[%d] = %d\n", i, get(&list, i));
     }
 
-    destory(&list);
+    destroy(&list);
 }
 
 // external
+/* create a list */
 void create(list_t **list, int entity)
 {
     list_t *new = NULL;
@@ -49,7 +53,8 @@ void create(list_t **list, int entity)
     *list = new;
 }
 
-void destory(list_t **list)
+/* destroy a list */
+void destroy(list_t **list)
 {
     while((*list)->node->next != NULL) {
         (*list)->node = _delnode((*list)->node->next, (*list)->node);
@@ -58,6 +63,7 @@ void destory(list_t **list)
     free(*list);
 }
 
+/* put an entity at the end of a list. */
 void append(list_t **list, int entity)
 {
     node_t *ptr;
@@ -69,15 +75,19 @@ void append(list_t **list, int entity)
     ptr->next = _addnode(ptr->next, NULL, entity);
 }
 
+/* put an entity at the front of a list. */
 void prepend(list_t **list, int entity)
 {
+    // dirty trick
     (*list)->node = _addnode((*list)->node,(*list)->node, entity);
 }
 
+/* insert an entity to a list. */
 void insert(list_t **list, int index, int entity)
 {
     node_t *ptr;
 
+    // dirty trick
     if(index >= size(list)) {
         printf("!!! Error: out of range. ");
     } else if(index == 0) {
@@ -90,10 +100,12 @@ void insert(list_t **list, int index, int entity)
     }
 }
 
+/* delete an entity from a list. */
 void expunge(list_t **list , int index)
 {
     node_t *ptr = NULL;
 
+    // dirty trick
     if(index >= size(list)) {
         printf("!!! Error: out of range.");
     } else if(index == 0) {
@@ -138,6 +150,7 @@ int get(list_t ** list, int index)
 }
 
 // internal
+/* connect a node and a node. */
 static node_t *_addnode(node_t *cur, node_t *next, const int entity)
 {
     node_t *new = NULL;
@@ -153,6 +166,7 @@ static node_t *_addnode(node_t *cur, node_t *next, const int entity)
     return cur;
 }
 
+/* delete a node */
 static node_t *_delnode(node_t *del, node_t *prev) 
 {
     prev->next = del->next;
