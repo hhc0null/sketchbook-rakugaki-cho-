@@ -45,7 +45,7 @@ void create(list_t **list, int entity)
 {
     list_t *new = NULL;
 
-    if( (new = (list_t *)malloc(sizeof(list_t)*1)) == NULL) {
+    if( (new = (list_t *)malloc(sizeof(list_t))) == NULL) {
         perror("Error: cannot allocate space");
         exit(EXIT_FAILURE);
     }
