@@ -3,7 +3,7 @@
 #include "list.h"
 
 // internal
-static node_t *_addnode(node_t *, node_t *, const int);
+static node_t *_addnode(node_t *, const int);
 static node_t *_delnode(node_t *, node_t *);
 
 int main(void)
@@ -49,7 +49,7 @@ void create(list_t **list, int entity)
         perror("Error: cannot allocate space");
         exit(EXIT_FAILURE);
     }
-    new->node = _addnode(new->node, NULL, entity);
+    new->node = _addnode(NULL, entity);
     *list = new;
 }
 
@@ -72,14 +72,14 @@ void append(list_t **list, int entity)
     while(ptr->next != NULL) {
         ptr = ptr->next;
     }
-    ptr->next = _addnode(ptr->next, NULL, entity);
+    ptr->next = _addnode(NULL, entity);
 }
 
 /* put an entity at the front of a list. */
 void prepend(list_t **list, int entity)
 {
     // dirty trick
-    (*list)->node = _addnode((*list)->node,(*list)->node, entity);
+    (*list)->node = _addnode((*list)->node, entity);
 }
 
 /* insert an entity to a list. */
@@ -96,7 +96,7 @@ void insert(list_t **list, int index, int entity)
         ptr = (*list)->node;
         for(int i = 1; i < index; i++)
             ptr = ptr->next;
-        ptr->next = _addnode(ptr->next, ptr->next, entity);
+        ptr->next = _addnode(ptr->next, entity);
     }
 }
 
@@ -151,7 +151,7 @@ int get(list_t ** list, int index)
 
 // internal
 /* connect a node and a node. */
-static node_t *_addnode(node_t *cur, node_t *next, const int entity)
+static node_t *_addnode(node_t *next, const int entity)
 {
     node_t *new = NULL;
 
@@ -161,9 +161,6 @@ static node_t *_addnode(node_t *cur, node_t *next, const int entity)
     }
     new->next = next;
     new->entity = entity;
-    cur = new;
-
-    return cur;
 }
 
 /* delete a node */
