@@ -66,7 +66,7 @@ void destroy(list_t **list)
 /* put an entity at the end of a list. */
 void append(list_t **list, int entity)
 {
-    node_t *ptr;
+    node_t *ptr = NULL;
 
     ptr = (*list)->node;
     while(ptr->next != NULL) {
@@ -85,7 +85,7 @@ void prepend(list_t **list, int entity)
 /* insert an entity to a list. */
 void insert(list_t **list, int index, int entity)
 {
-    node_t *ptr;
+    node_t *ptr = NULL;
 
     // dirty trick
     if(index >= size(list)) {
