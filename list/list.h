@@ -12,7 +12,7 @@ typedef struct _list_t {
 } list_t;
 
 // external functions 
-void create(list_t **, int);
+list_t *create(int);
 void destroy(list_t **);
 void append(list_t **, int);
 void prepend(list_t **, int);

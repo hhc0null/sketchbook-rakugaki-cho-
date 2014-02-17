@@ -11,7 +11,7 @@ int main(void)
     /*** test code ***/
     list_t *list = NULL;
 
-    create(&list, 0);
+    list = create(0);
 
     printf("size(&list) = %d\n", size(&list));
     for(int i = 1; i < 5; i++) {
@@ -41,7 +41,7 @@ int main(void)
 
 // external
 /* create a list */
-void create(list_t **list, int entity)
+list_t *create(int entity)
 {
     list_t *new = NULL;
 
@@ -50,7 +50,8 @@ void create(list_t **list, int entity)
         exit(EXIT_FAILURE);
     }
     new->node = _addnode(NULL, entity);
-    *list = new;
+
+    return new;
 }
 
 /* destroy a list */
