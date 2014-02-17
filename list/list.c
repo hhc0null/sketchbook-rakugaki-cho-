@@ -47,7 +47,7 @@ void create(list_t **list, int entity)
 
     if( (new = (list_t *)malloc(sizeof(list_t)*1)) == NULL) {
         perror("Error: cannot allocate a space");
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
     new->node = _addnode(new->node, NULL, entity);
     *list = new;
@@ -157,7 +157,7 @@ static node_t *_addnode(node_t *cur, node_t *next, const int entity)
 
     if( (new = (node_t *)malloc(sizeof(node_t))) == NULL) {
         perror("Error: cannot allocate a space.");
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
     new->next = next;
     new->entity = entity;
